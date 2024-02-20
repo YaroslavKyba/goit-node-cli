@@ -1,4 +1,7 @@
 import { program } from "commander";
+
+import contacts from "./src/db/contacts.json" assert { type: "json" };
+
 program
   .option("-a, --action <type>", "choose action")
   .option("-i, --id <type>", "user id")
@@ -14,20 +17,23 @@ const options = program.opts();
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      // ...
-      break;
+      const allContacts = await contacts.listContacts();
+      return console.log(allContacts);
 
     case "get":
-      // ... id
-      break;
+      const oneContact = await contacts.getContactById(id);
+      return console.log(oneContact);
+    // ... id
 
     case "add":
-      // ... name email phone
-      break;
+      const newContact = await contacts.addContact(name, email, phone);
+      return console.log(newContact);
+    // ... name email phone
 
     case "remove":
-      // ... id
-      break;
+      const deleteContact = await contacts.removeContact(id);
+      return console.log(deleteContact);
+    // ... id
 
     default:
       console.warn("\x1B[31m Unknown action type!");
@@ -35,3 +41,5 @@ async function invokeAction({ action, id, name, email, phone }) {
 }
 
 invokeAction(options);
+
+// invokeAction({ action: "get", id: "e6ywwRe4jcqxXfCZOj_1e" });
