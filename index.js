@@ -1,6 +1,6 @@
 import { program } from "commander";
 
-import contacts from "./src/db/contacts.json" assert { type: "json" };
+import * as contacts from "./src/contacts.js";
 
 program
   .option("-a, --action <type>", "choose action")
@@ -18,7 +18,7 @@ async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
       const allContacts = await contacts.listContacts();
-      return console.log(allContacts);
+      return console.table(allContacts);
 
     case "get":
       const oneContact = await contacts.getContactById(id);
@@ -42,4 +42,4 @@ async function invokeAction({ action, id, name, email, phone }) {
 
 invokeAction(options);
 
-// invokeAction({ action: "get", id: "e6ywwRe4jcqxXfCZOj_1e" });
+// invokeAction({ action: "get", id: "1DEXoP8AuCGYc1YgoQ6hw" });

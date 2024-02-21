@@ -1,9 +1,9 @@
 import fs from "fs/promises";
 import path from "path";
-// чи коректний імпорт?
+
 import { nanoid } from "nanoid";
 
-const contactsPath = path.join(__dirname, "db", "contacts.json");
+const contactsPath = path.resolve("src", "db", "contacts.json");
 
 async function listContacts() {
   const data = await fs.readFile(contactsPath);
@@ -49,9 +49,4 @@ async function addContact(name, email, phone) {
   // ...твій код. Повертає об'єкт доданого контакту (з id).
 }
 
-module.exports = {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-};
+export { listContacts, getContactById, removeContact, addContact };
