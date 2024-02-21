@@ -41,5 +41,3 @@ async function invokeAction({ action, id, name, email, phone }) {
 }
 
 invokeAction(options);
-
-// invokeAction({ action: "get", id: "1DEXoP8AuCGYc1YgoQ6hw" });
